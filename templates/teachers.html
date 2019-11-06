@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>老师信息</title>
+    <style>
+        #container {
+            width: 80%;
+            margin: 10px auto;
+        }
+        .teacher {
+            width: 100%;
+            margin: 0 auto;
+            padding: 10px 0;
+            border-bottom: 1px dashed gray;
+            overflow: auto;
+        }
+        .teacher div {
+            float: left;
+        }
+        .photo {
+            height: 140px;
+            border-radius: 75px;
+            overflow: hidden;
+            margin-left: 20px;
+        }
+        .info {
+            width: 75%;
+            margin-left: 30px;
+        }
+        .info div {
+            clear: both;
+            margin: 5px 10px;
+        }
+        .info span {
+            margin-right: 25px;
+        }
+        .info a {
+            text-decoration: none;
+            color: blue;
+        }
+        .user {
+            float: right;
+            margin: 10px 10px;
+        }
+        .user+h1 {
+            clear: both;
+        }
+        #photo {
+            border-radius: 32px 32px 32px 32px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>{{subject.name}}学科的老师信息</h1>
+        <hr>
+        {% if teachers %}
+        {% for teacher in teachers %}
+        <div class="teacher">
+            <div class="photo">
+                <img src="{% static teacher.photo %}" height="140" alt="">
+            </div>
+            <div class="info">
+                <div>
+                    <span><strong>姓名：{{teacher.name}}</strong></span>
+                    <span>性别：{{teacher.gender|yesno:'男,女'}}</span>
+<!--                    {% if teacher.gender %}<span>男</span>{% else %}<span>女</span>{% endif %}-->
+                    <span>出生日期:{{teacher.birth}}</span>
+                </div>
+                <div class="intro">
+                {{teacher.intro}}
+                </div>
+                <div class="comment">
+                    <a href="/comment/?tno={{ teacher.no }}&flag=1">好评</a>&nbsp;&nbsp;(<strong>{{teacher.good_count}}</strong>)
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/comment/?tno={{ teacher.no }}&flag=2">差评</a>&nbsp;&nbsp;(<strong>{{teacher.bad_count}}</strong>)
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>暂无老师信息</h2>
+        {% endif %}
+       <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+        $(()=>{
+            $('.comment>a').on('click',(evt)=>{
+                evt.preventDefault()
+                let url = evt.target.href
+                $.getJSON(url, (json)=>{
+                    if(json.code == 10000){
+                        let strong = evt.target.nextElementSibling
+                        strong.textContent = parseInt(strong.textContent)+1
+                    }else{
+                        alert(json.message)
+                    }
+                })
+
+            })
+        })
+        </script>
+
+</body>
+</html>
