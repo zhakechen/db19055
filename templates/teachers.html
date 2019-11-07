@@ -83,6 +83,9 @@
         {% else %}
         <h2>暂无老师信息</h2>
         {% endif %}
+
+        <p>{{ tot }}</p><a href="/search/?see={{ see }}&tot={{ tot|add:'1'}}">下一页</a>
+        {% for seekk_l in seekk_ls %}<a href="/search/?see={{ see }}&tot={{ seekk_l }}">{{ seekk_l }}</a>{% endfor %}
        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
         <script>
         $(()=>{
@@ -100,6 +103,7 @@
 
             })
         })
+
         </script>
 
 </body>

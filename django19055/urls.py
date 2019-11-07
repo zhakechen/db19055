@@ -23,4 +23,9 @@ urlpatterns = [
     path('', index),
     path('teachers/', show_teachers),
     path('comment/', comment),
+    path('search/', search),
+    path('register/', register),
+    path('mobile/', send_code_by_sms),
+    path('login/', login),
+    path('captcha/', captcha),
 ]

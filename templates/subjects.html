@@ -21,7 +21,11 @@
     </style>
 </head>
 <body>
+<input type="text"><input type="button" value="搜索">
     <div id="container">
+        <div class="nav">
+            <a href="">登录</a><a href="">注册</a>
+        </div>
         <h1>千锋教育成都校区所有学科</h1>
         <hr>
         <div id="main">
@@ -62,5 +66,15 @@
             </dl>
         </div>
     </div>
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js" ></script>
+
+        <script>
+     $(()=>{
+                $('input[type=button]').on('click',(evt)=>{
+                    let see = $('input[type=text]').val()
+                    window.location = '/search/?see=' + see
+                })
+            })
+        </script>
 </body>
 </html>
