@@ -49,18 +49,23 @@
         <h1>用户登录</h1>
         <hr>
         <form action="" method="post">
+<!--            <p class="hint">{{ hint }}</p>-->
+            {% csrf_token %}
             <div class="input">
                 <label>用户名：</label>
                 <input type="text" name="username">
+                <div>{{ errors.username }}</div>
             </div>
             <div class="input">
                 <label>密码：</label>
                 <input type="password" name="password">
+                <div>{{ errors.password }}</div>
             </div>
             <div class="input captcha">
                 <label>验证码：</label>
                 <input type="text" name="captcha">
                 <img id="code" src="/captcha/" width="120">
+                <div>{{ errors.captcha }}</div>
             </div>
             <div class="input">
                 <input type="submit" value="登录">

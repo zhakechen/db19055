@@ -126,3 +126,32 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+
+
+# SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+
+# 配置缓存
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': [
+            'redis://114.55.94.128:3389/0',     # redis协议 服务器端口/0号数据库
+        ],
+        'KEY_PREFIX': 'django1905:polls',
+        'OPTIONS': {                     # 连接池
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'CONNECTION_POOL_KWARGS': {
+                'max_connections': 256,
+            },
+            'PASSWORD': 'qqjz',
+        }
+    },
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+
+
+
+

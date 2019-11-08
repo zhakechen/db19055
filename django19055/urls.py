@@ -28,4 +28,5 @@ urlpatterns = [
     path('mobile/', send_code_by_sms),
     path('login/', login),
     path('captcha/', captcha),
+    path('loginout/', loginout)
 ]

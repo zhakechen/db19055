@@ -18,13 +18,24 @@
             text-decoration: none;
             color: blue;
         }
+        .nav{
+            float:right;
+            margin-right:50px
+        }
+        .nav+h1{
+            clear:both;
+        }
     </style>
 </head>
 <body>
 <input type="text"><input type="button" value="搜索">
     <div id="container">
         <div class="nav">
-            <a href="">登录</a><a href="">注册</a>
+            {% if request.session.user %}
+            {{ request.session.user }}<a href="/loginout/">注销</a>
+            {% else %}
+            <a href="/login/">登录</a><a href="/register/">注册</a>
+            {% endif %}
         </div>
         <h1>千锋教育成都校区所有学科</h1>
         <hr>
